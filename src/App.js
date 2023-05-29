@@ -1,14 +1,12 @@
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Welcome from './components/Welcome'
-
 import "./App.css";
+import Navbar from "./pages/Navbar";
 
 const App = () => {
   return (
-    <Routes>
-      {/* Your Route components will go here */}
-    </Routes>
+    <div>
+      <h1 className="pageHeader">Dog Photography Website</h1>
+          <Navbar/>
+    </div>
   )
 }
 
