@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import {Container, Col, Row} from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 const DOG_API = "https://dog.ceo/api/breeds/image/random";
 
 
@@ -37,9 +39,13 @@ const Welcome = () => {
   }, []);
 
   return (
-    <div className="image-display">
-      <img src={currentDog} alt="A lovely dog" />
-    </div>
+    <Container className="welcome-display">
+      <Row className="justify-content-center">
+        <Col className="col-md-8">
+            <Image fluid={true} src={currentDog} id="welcome-image" alt="A lovely dog" />
+          </Col>
+      </Row>
+    </Container>
   );
 };
 

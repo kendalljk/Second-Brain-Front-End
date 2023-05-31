@@ -1,15 +1,18 @@
 import React from 'react'
 import { useState } from "react";
+import {Container, Col, Row} from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const EMAIL_REGEX =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 
 const initialState = {
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     phone: "",
+    date: "",
     message: "",
     error: "",
 }
@@ -19,11 +22,15 @@ const maxLength = (value, length) => value.length <= length;
 const required = (value) => value !== "";
 const pattern = (value, pattern) => String(value).toLocaleLowerCase().match(pattern);
 
-const validateName = (name) =>{
-    if (!required(name)) return "Please enter your name."
-    if (!minLength(name, 2)) return "Your name must be at least 2 characters."
-    if (!maxLength(name, 12)) return "Your name must be no longer than 12 characters."
+const validateName = (fullName) =>{
+    if (!required(fullName)) return "Please enter your name."
+    if (!minLength(fullName, 2)) return "Your name must be at least 2 characters."
+    if (!maxLength(fullName, 25)) return "Your name must be no longer than 25 characters."
     return "";
+}
+
+const validateDate = (date) => {
+    if (!required(date)) return "Please select a date"
 }
 
 const validateMessage = (message) => {
@@ -46,10 +53,10 @@ const validatePhone = (phone) => {
 }
 
 const ERROR_DICT = {
-    firstName: validateName,
-    lastName: validateName,
+    fullName: validateName,
     email: validateEmail,
     phone: validatePhone,
+    date: validateDate,
     message: validateMessage,
 }
 
@@ -75,46 +82,52 @@ const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         alert(
-        `Thanks for reaching out, ${state.firstName}. You can expect an email response at ${state.email} in 1-2 business days.`
+        `Thanks for reaching out, ${state.fullName}. You can expect an email response at ${state.email} in 1-2 business days.`
         )
         setState(initialState);
         }
 
     return (
-    <div className='contact-form'>
-        <div className='contact-header'>
-            <h2>Contact</h2>
+    <Container>
+        <Row className='text-center'>
+            <h2 style={{marginTop: '2%'}}>Contact</h2>
             <p>To request a date, or for more information, please contact me.</p>
-        </div>
-        <form onSubmit={handleSubmit}>
-            <label>
-                First Name:
-                <input placeholder="First Name" type="text" name="firstName" id="firstName" value={state.firstName} onChange={handleChange}/>
-            </label>
-            {error.firstName && <span className="error-text">{error.firstName}</span>}
-            <label>
-                Last Name:
-                <input placeholder="Last Name" type="text" name="lastName" id="lastName" value={state.lastName} onChange={handleChange}/>
-            </label>
-            {error.lastName && <span className="error-text">{error.lastName}</span>}
-            <label>
-                Email:
-                <input placeholder="you@provider.com" type="email" name="email" id="email" value={state.email} onChange={handleChange}/>
-            </label>
-            {error.email && <span className="error-text">{error.email}</span>}
-            <label>
-                Phone Number:
-                <input placeholder="(XXX)-XXX-XXXX" type="tel" name="phone" id="phone" value={state.phone} onChange={handleChange}/>
-            </label>
-            {error.phone && <span className="error-text">{error.phone}</span>}
-            <label>
-                Tell me about what you're looking for, any special requests... 
-                <textarea placeholder="Message" type="text" name="message" id="phone" value={state.message} onChange={handleChange}/>
-            </label>
-            {error.message && <span className="error-text">{error.message}</span>}
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+        </Row>
+        <Row className='justify-content-center'>
+            <Col className='col-md-6'>
+                <Form className='col-lg' style={{}} onSubmit={handleSubmit}>
+                    <Form.Group className='fullName'>
+                        <Form.Label>Full Name:</Form.Label>
+                        <Form.Control type='text' placeholder="Enter Full Name" name="fullName" id="fullName" value={state.fullName} onChange={handleChange}/>
+                    </Form.Group>
+                    {error.fullName && <span className="error-text">{error.fullName}</span>}
+                    <Form.Group className='email'>
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control type='email' placeholder="Enter Email" name="email" id="email" value={state.email} onChange={handleChange}/>
+                    </Form.Group>
+                    {error.email && <span className="error-text">{error.email}</span>}
+                    <Form.Group className='phone'>
+                        <Form.Label>Phone Number:</Form.Label>
+                        <Form.Control type='tel' placeholder="(XXX)-XXX-XXXX" name="phone" id="phone" value={state.phone} onChange={handleChange}/>
+                    </Form.Group>
+                    {error.phone && <span className="error-text">{error.phone}</span>}
+                    <Form.Group className='date'>
+                        <Form.Label>Date Requesting:</Form.Label>
+                        <Form.Control type='date' name="date" id="date" value={state.date} onChange={handleChange}/>
+                    </Form.Group>
+                    {error.date && <span className="error-text">{error.date}</span>}
+                    <Form.Group className='message'>
+                        <Form.Label>Message</Form.Label>
+                        <Form.Control as='textarea' placeholder="Tell me about what you're looking for, any special requests... " name="message" id="message" style={{height: '100px', verticalAlign: 'top'}} value={state.message} onChange={handleChange}/>
+                    </Form.Group>
+                    {error.message && <span className="error-text">{error.message}</span>}
+                    <div className='d-flex justify-content-center'>
+                        <Button style={{marginTop: '5%'}} variant='outline-primary' type="submit">Submit</Button>
+                    </div>
+                </Form>
+            </Col>
+        </Row>
+    </Container>
     );
 };
 

@@ -1,12 +1,10 @@
 import "./App.css";
-import Navbar from "./pages/Navbar";
+import {Container} from "react-bootstrap"
+import Navigation from "./pages/Navigation";
 
 const App = () => {
   return (
-    <div>
-      <h1 className="pageHeader">Dog Photography Website</h1>
-          <Navbar/>
-    </div>
+    <Navigation/>
   )
 }
 
