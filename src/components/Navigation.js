@@ -1,20 +1,20 @@
 import React from 'react'
 import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import logo from '../icons/logo.png';
 
 export const Navigation = () => {
   return (
     <>
-        <Navbar bg='light' expand='lg'>
-            <Navbar.Brand>
+        <Navbar bg='dark' variant='dark' expand='lg'>
+            <Navbar.Brand as='h1'>
                 <img
-                alt=""
-                src='./icons/Vector.png'
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
+                src={logo} 
+                alt=''
+                width="40"
+                height="40"
                 />
-                Book Notes
+                Second Brain
             </Navbar.Brand>
             <Navbar.Toggle aria-controls='my-nav'/>
             <Navbar.Collapse id='my-nav'>
@@ -23,8 +23,8 @@ export const Navigation = () => {
                     <NavDropdown title="More">
                         <NavDropdown.Item 
                         as={Link} 
-                        to='/createnote'>
-                            Create Note
+                        to='/booksearch'>
+                            Book Search
                         </NavDropdown.Item>
                         <NavDropdown.Item 
                         as={Link} 

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Booknotes = () => {
+const BookNotes = () => {
   return (
     <div>Booknotes</div>
   )
 }
 
-export default Booknotes
+export default BookNotes;
