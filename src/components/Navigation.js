@@ -28,8 +28,8 @@ export const Navigation = () => {
                         </NavDropdown.Item>
                         <NavDropdown.Item 
                         as={Link} 
-                        to='/notescollection'>
-                            Notes Collection 
+                        to='/notespage'>
+                            My Notes 
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>

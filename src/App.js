@@ -1,6 +1,5 @@
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
-import NotesCollection from './pages/NotesCollection';
 import CreateNote from './pages/CreateNote';
 import Homepage from './pages/Homepage';
 import Navigation  from './components/Navigation';
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import BookList from './pages/BookList';
 import BookSearch from './pages/BookSearch';
 import { useEffect } from 'react';
+import NotesPage from './pages/NotesPage';
 
 const initialNote = {
   key: "",
@@ -39,7 +39,7 @@ function App() {
         <Route path="/booksearch" element={<BookSearch bookData={bookData} setBookData={setBookData}/>}>
           <Route path="/booksearch/:query" element={<BookList bookData={bookData} myNote={myNote} setMyNote={setMyNote} />}/>
         </Route>
-        <Route path="/notescollection" element={<NotesCollection noteCollection={noteCollection}/>}/>
+        <Route path="/notespage" element={<NotesPage noteCollection={noteCollection}/>}/>
         <Route path="/createnote/*" element={<CreateNote bookData={bookData} myNote={myNote} setMyNote={setMyNote} noteCollection={noteCollection} setNoteCollection={setNoteCollection}/>}/>
       </Routes>
     </>

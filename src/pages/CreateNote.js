@@ -4,12 +4,12 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
-    const {title, author, coverArtUrl, key} = useLocation().state || {};
+    const navigate = useNavigate();
 
     const initialFormState = {
         bookGenre: "",
@@ -24,25 +24,32 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setMyNote (prevNote => ({
-            ...prevNote,
+        setFormState (prevState => ({
+            ...prevState,
             [name]: value
         }));
     };
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
-        setMyNote((prevNote) => ({
-            ...prevNote,
+        setFormState((prevState) => ({
+            ...prevState,
             [name]: checked,
         }));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setNoteCollection((prevCollection) =>
-        [...prevCollection, myNote])
+        setMyNote((prevNote) => ({
+            ...prevNote, 
+            ...formState,
+        }));
+        setNoteCollection((prevCollection) =>[
+            ...prevCollection,
+            myNote
+        ])
         setFormState(initialFormState);
+        navigate(`/notespage`)
     }
 
     useEffect(() => {
@@ -68,7 +75,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                     aria-label="bookGenre"
                     name="bookGenre"
                     onChange={handleInputChange}
-                    value={myNote.bookGenre}>
+                    value={formState.bookGenre}>
                         <option>Select a genre...</option>
                         <option value="Action/Adventure">Action/Adventure</option>
                         <option value="Autobiography/Biography">Autobiography/ Biography</option>
@@ -86,7 +93,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                     placeholder="Brief summary..."
                     style={{ height: '100px' }}
                     name="bookSummary"
-                    value={myNote.bookSummary}
+                    value={formState.bookSummary}
                     onChange={handleInputChange}
                     />
                     <Form.Label as='h6' className=''>Favorite quotes, memorable passages...</Form.Label>
@@ -95,7 +102,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                     placeholder="Favorite quotes, memorable passages..."
                     style={{ height: '100px' }}
                     name="favoriteQuotes"
-                    value={myNote.favoriteQuotes}
+                    value={formState.favoriteQuotes}
                     onChange={handleInputChange}
                     />
                     <Form.Label as='h6' className=''>My notes...</Form.Label>
@@ -104,7 +111,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                     placeholder="My notes, final thoughts..."
                     style={{ height: '100px' }}
                     name="myThoughts"
-                    value={myNote.myThoughts}
+                    value={formState.myThoughts}
                     onChange={handleInputChange}
                     />
                     <Form.Check
@@ -112,7 +119,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                     id='finishedBook'
                     label='Finished Book'
                     name="finished"
-                    value={myNote.finished}
+                    value={formState.finished}
                     onChange={handleCheckboxChange}
                     />
                     <Row>
@@ -120,7 +127,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                         <input className='m-3' 
                         type="date" 
                         name="dateFinished"
-                        value={myNote.dateFinished}
+                        value={formState.dateFinished}
                         onChange={handleInputChange} />
                         </Form.Label>
                     </Row>

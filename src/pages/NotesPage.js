@@ -3,11 +3,11 @@ import { Container, Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card'
 
-const NotesCollection = ({notecollection}) => {
-  return (
+const NotesPage = ({noteCollection}) => {
+    return (
     <Container className='text-center'>
         <Row>
-        {notecollection.map((book) => (
+        {noteCollection? (noteCollection.map((book) => (
             <Col className='d-flex justify-content-center' key={book.key}>
                 <Card className='bookCard' style={{width: '10rem', height: '20rem'}}>
                     <Card.Img className='bookImg' variant='top' src={book.coverArtUrl} alt={book.title}/>
@@ -17,10 +17,11 @@ const NotesCollection = ({notecollection}) => {
                     </Card.Body>
                 </Card>
             </Col>
-        ))}
+        ))
+    ) : <span>No current notes to display</span>}
         </Row>
     </Container>
     );
 };
 
-export default NotesCollection;
+export default NotesPage;
