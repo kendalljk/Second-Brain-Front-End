@@ -4,12 +4,50 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
-const CreateNote = ({bookData, myNote, setMyNote}) => {
-    console.log('My Note:', myNote);
+const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
+    const {title, author, coverArtUrl, key} = useLocation().state || {};
+
+    const initialFormState = {
+        bookGenre: "",
+        finished: false,
+        dateFinished: "",
+        bookSummary: "",
+        favoriteQuotes: "",
+        myThoughts: "",
+    }
+
+    const [formState, setFormState] = useState (initialFormState)
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setMyNote (prevNote => ({
+            ...prevNote,
+            [name]: value
+        }));
+    };
+
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        setMyNote((prevNote) => ({
+            ...prevNote,
+            [name]: checked,
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setNoteCollection((prevCollection) =>
+        [...prevCollection, myNote])
+        setFormState(initialFormState);
+    }
+
+    useEffect(() => {
+        console.log('My Note Collection:', noteCollection);
+    }, [noteCollection]);
 
     return (
     <Container className='note-container'>
@@ -24,46 +62,66 @@ const CreateNote = ({bookData, myNote, setMyNote}) => {
                 </Card>
             </Col>
             <Col className='note-col'>
-                <Form className='noteForm' onSubmit={''}>
+                <Form className='noteForm' onSubmit={handleSubmit}>
                     <Form.Label as='h6' className=''>Book Genre:</Form.Label>
-                    <Form.Select aria-label="book-genre">
+                    <Form.Select 
+                    aria-label="bookGenre"
+                    name="bookGenre"
+                    onChange={handleInputChange}
+                    value={myNote.bookGenre}>
                         <option>Select a genre...</option>
-                        <option value="1">Action/Adventure</option>
-                        <option value="2">Autobiography/ Biography</option>
-                        <option value="3">Fantasy</option>
-                        <option value="4">History</option>
-                        <option value="5">Horror</option>
-                        <option value="6">Historical Fiction</option>
-                        <option value="7">Mystery</option>
-                        <option value="8">Philosophy</option>
-                        <option value="9">Self-Development</option>
+                        <option value="Action/Adventure">Action/Adventure</option>
+                        <option value="Autobiography/Biography">Autobiography/ Biography</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="History">History</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Historical Fiction">Historical Fiction</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Self-Development">Self-Development</option>
                     </Form.Select>
                     <Form.Label as='h6' className=''>Book Summary: </Form.Label>
                     <Form.Control
                     as="textarea"
                     placeholder="Brief summary..."
                     style={{ height: '100px' }}
+                    name="bookSummary"
+                    value={myNote.bookSummary}
+                    onChange={handleInputChange}
                     />
                     <Form.Label as='h6' className=''>Favorite quotes, memorable passages...</Form.Label>
                     <Form.Control
                     as="textarea"
                     placeholder="Favorite quotes, memorable passages..."
                     style={{ height: '100px' }}
+                    name="favoriteQuotes"
+                    value={myNote.favoriteQuotes}
+                    onChange={handleInputChange}
                     />
                     <Form.Label as='h6' className=''>My notes...</Form.Label>
                     <Form.Control
                     as="textarea"
                     placeholder="My notes, final thoughts..."
                     style={{ height: '100px' }}
+                    name="myThoughts"
+                    value={myNote.myThoughts}
+                    onChange={handleInputChange}
                     />
                     <Form.Check
                     type='checkbox'
                     id='finishedBook'
                     label='Finished Book'
+                    name="finished"
+                    value={myNote.finished}
+                    onChange={handleCheckboxChange}
                     />
                     <Row>
                         <Form.Label as='h6'>Date Book Finished:
-                        <input className='m-3' type="date" name="dateFinished" />
+                        <input className='m-3' 
+                        type="date" 
+                        name="dateFinished"
+                        value={myNote.dateFinished}
+                        onChange={handleInputChange} />
                         </Form.Label>
                     </Row>
                     <Button className='noteBtn' variant='primary' type='submit'>

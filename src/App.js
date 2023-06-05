@@ -1,14 +1,16 @@
 import './App.css';
 import {Routes, Route} from 'react-router-dom'
-import BookNotes from './pages/BookNotes';
+import NotesCollection from './pages/NotesCollection';
 import CreateNote from './pages/CreateNote';
 import Homepage from './pages/Homepage';
 import Navigation  from './components/Navigation';
 import { useState } from 'react';
 import BookList from './pages/BookList';
 import BookSearch from './pages/BookSearch';
+import { useEffect } from 'react';
 
 const initialNote = {
+  key: "",
   title: "",
   author: "",
   coverArtUrl: "",
@@ -17,15 +19,17 @@ const initialNote = {
   dateFinished: "",
   bookSummary: "",
   favoriteQuotes: [],
-  myNotes: [],
+  myThoughts: [],
 }
 
 function App() {
   const [bookData, setBookData] = useState([]);
   const [myNote, setMyNote]= useState(initialNote);
-  const [noteCollection, setNoteCollection] = useState([])
+  const [noteCollection, setNoteCollection] = useState(() => JSON.parse(localStorage.getItem('notes')) || [])
 
-
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(noteCollection))
+}, [noteCollection])
 
   return (
     <>
@@ -35,8 +39,8 @@ function App() {
         <Route path="/booksearch" element={<BookSearch bookData={bookData} setBookData={setBookData}/>}>
           <Route path="/booksearch/:query" element={<BookList bookData={bookData} myNote={myNote} setMyNote={setMyNote} />}/>
         </Route>
-        <Route path="/booknotes" element={<BookNotes/>}/>
-        <Route path="/createnote/*" element={<CreateNote bookData={bookData} myNote={myNote} setMyNote={setMyNote}/>}/>
+        <Route path="/notescollection" element={<NotesCollection noteCollection={noteCollection}/>}/>
+        <Route path="/createnote/*" element={<CreateNote bookData={bookData} myNote={myNote} setMyNote={setMyNote} noteCollection={noteCollection} setNoteCollection={setNoteCollection}/>}/>
       </Routes>
     </>
   );

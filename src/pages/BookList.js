@@ -9,15 +9,16 @@ const BookList = ({bookData, myNote, setMyNote}) => {
 
     const navToNote = (book) => {
         const selectedBookData = {
+            key: book.key,
             title: book.title,
             author: book.author,
             coverArtUrl: book.coverArtUrl,
         };
-        console.log(selectedBookData);
-        setMyNote((prevNote => ({
+        console.log("Selected Book Data:", selectedBookData);
+        setMyNote((prevNote) => ({
             ...prevNote, 
             ...selectedBookData,
-        })));
+        }));
         navigate(`/createnote/${encodeURIComponent(book.title)}`);
     }
 
@@ -29,8 +30,8 @@ const BookList = ({bookData, myNote, setMyNote}) => {
         <Container className='text-center'>
             <Row>
             {bookData.map((book) => (
-                <Col>
-                    <Card className='bookCard' key={book.isbn} style={{width: '10rem', height: '20rem'}}>
+                <Col className='d-flex justify-content-center' key={book.key}>
+                    <Card className='bookCard' style={{width: '10rem', height: '20rem'}}>
                         <Card.Img className='bookImg' variant='top' src={book.coverArtUrl} alt={book.title}/>
                         <Card.Body style={{padding: '5%'}}>
                             <Card.Title as='h6' className='card-title'>{book.title}</Card.Title>
@@ -41,9 +42,6 @@ const BookList = ({bookData, myNote, setMyNote}) => {
                 </Col>
             ))}
             </Row>
-            <div className='navigation-buttons'>
-                <Button>Back</Button><Button>Next</Button>
-            </div>
         </Container>
         );
     };

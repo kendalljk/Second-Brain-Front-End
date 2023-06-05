@@ -24,12 +24,12 @@ export const Navigation = () => {
                         <NavDropdown.Item 
                         as={Link} 
                         to='/booksearch'>
-                            Book Search
+                            Add Notes to Book
                         </NavDropdown.Item>
                         <NavDropdown.Item 
                         as={Link} 
-                        to='/booknotes'>
-                            Book Notes 
+                        to='/notescollection'>
+                            Notes Collection 
                         </NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
