@@ -28,6 +28,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
             ...prevState,
             [name]: value
         }));
+        console.log('Form State:', formState)
     };
 
     const handleCheckboxChange = (event) => {
@@ -40,36 +41,40 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setMyNote((prevNote) => ({
-            ...prevNote, 
+        const newNote = {
+            ...myNote,
             ...formState,
-        }));
+        }
+        setMyNote(newNote);
         setNoteCollection((prevCollection) =>[
             ...prevCollection,
-            myNote
+            newNote
         ])
+        console.log('Note Collection:', noteCollection)
         setFormState(initialFormState);
-        navigate(`/notespage`)
     }
 
     useEffect(() => {
+        if (noteCollection.includes(myNote)){
+            navigate(`/notespage`)
+        }
         console.log('My Note Collection:', noteCollection);
-    }, [noteCollection]);
+    }, [noteCollection, navigate, myNote]);
 
     return (
-    <Container className='note-container'>
-        <Row className='note-row'>
-            <Col className='note-col d-flex justify-content-center text-center'>
-                <Card className='note-bookCard' style={{width: '20rem', height: '30rem'}}>
-                    <Card.Img className='noteImg' src={myNote.coverArtUrl} alt={myNote.title}/>
+    <Container className='display-note-container'>
+        <Row className='display-note-row'>
+            <Col className='display-note-col d-flex justify-content-center text-center'>
+                <Card className='display-note-bookCard' style={{width: '20rem', height: '30rem'}}>
+                    <Card.Img className='displayNoteImg' src={myNote.coverArtUrl} alt={myNote.title}/>
                     <Card.Body style={{padding: '10px'}}>
                         <Card.Title as='h5' className='card-title'>{myNote.title}</Card.Title>
                         <Card.Text>By: {myNote.author}</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>
-            <Col className='note-col'>
-                <Form className='noteForm' onSubmit={handleSubmit}>
+            <Col className='display-note-col'>
+                <Form className='displayNoteForm' onSubmit={handleSubmit}>
                     <Form.Label as='h6' className=''>Book Genre:</Form.Label>
                     <Form.Select 
                     aria-label="bookGenre"
@@ -131,7 +136,7 @@ const CreateNote = ({myNote, setMyNote, noteCollection, setNoteCollection}) => {
                         onChange={handleInputChange} />
                         </Form.Label>
                     </Row>
-                    <Button className='noteBtn' variant='primary' type='submit'>
+                    <Button className='displayNoteBtn' variant='primary' type='submit'>
                     Add Note
                     </Button>
                 </Form> 
