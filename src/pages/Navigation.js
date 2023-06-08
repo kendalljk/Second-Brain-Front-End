@@ -12,7 +12,8 @@ function Navigation() {
         <Router>
             <header>
             <Navbar bg="light">
-                <Navbar.Brand style={{paddingLeft: '5%'}} as="h1">
+                <Navbar.Brand 
+                style={{paddingLeft: '5%'}} as="h1">
                     <img src={logo} alt="Logo" className="logo" style={{width: '2.5rem', height: 'auto', paddingRight: '5%'}} />
                     Brian Koch Photography
                 </Navbar.Brand>
