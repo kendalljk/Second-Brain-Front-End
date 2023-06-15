@@ -33,15 +33,29 @@ const BookList = ({ bookData, myNote, setMyNote }) => {
           <Col className="d-flex justify-content-center" key={book.key}>
             <Card
               className="bookCard"
-              style={{ width: "10rem", height: "20rem" }}
+              style={{
+                width: "12rem",
+                height: "21rem",
+              }}
             >
               <Card.Img
                 className="bookImg"
                 variant="top"
                 src={book.coverArtUrl}
                 alt={book.title}
+                style={{
+                  width: "100%",
+                  height: "13rem",
+                }}
               />
-              <Card.Body style={{ padding: "5%" }}>
+              <Card.Body
+                style={{
+                  padding: "2% 0",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
                 <Card.Title as="h6" className="card-title">
                   {book.title}
                 </Card.Title>

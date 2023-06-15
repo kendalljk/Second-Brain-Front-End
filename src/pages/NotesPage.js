@@ -34,17 +34,30 @@ const NotesPage = ({ noteCollection }) => {
                   className={`card-container ${
                     flippedStates[book.key] ? "flipped" : ""
                   }`}
-                  style={{ width: "22rem", height: "40rem" }}
+                  style={{
+                    width: flippedStates[book.key] ? "23rem" : "12rem",
+                    height: flippedStates[book.key] ? "40rem" : "20rem",
+                  }}
                 >
                   <div className="card-front">
-                    <Card.Body>
-                      <Card.Img
-                        className="myNoteImg"
-                        src={book.coverArtUrl}
-                        alt={book.title}
-                        style={{ width: "20rem", height: "32rem" }}
-                      />
-                      <Card.Title>{book.title}</Card.Title>
+                    <Card.Img
+                      className="myNoteImg"
+                      src={book.coverArtUrl}
+                      alt={book.title}
+                      style={{
+                        width: "100%",
+                        height: "13rem",
+                      }}
+                    />
+                    <Card.Body
+                      style={{
+                        padding: "2% 0",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Card.Title as="h6">{book.title}</Card.Title>
                       <Card.Text>
                         <div>By: {book.author}</div>
                         {book.finished ? (
@@ -57,7 +70,11 @@ const NotesPage = ({ noteCollection }) => {
                   </div>
                   <div className="card-back">
                     <Card.Body
-                      style={{ maxHeight: "39rem", overflowY: "auto" }}
+                      style={{
+                        height: "39rem",
+                        width: "22rem",
+                        overflowY: "auto",
+                      }}
                     >
                       <Card.Text>
                         <div>
