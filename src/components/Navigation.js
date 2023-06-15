@@ -1,40 +1,38 @@
 import React from 'react'
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import logo from '../icons/logo.png';
 
 export const Navigation = () => {
-  return (
+    return (
     <>
-        <Navbar bg='dark' variant='dark' expand='lg'>
-            <Navbar.Brand as='h1'>
-                <img
-                src={logo} 
-                alt=''
-                width="40"
-                height="40"
-                />
-                Second Brain
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls='my-nav'/>
-            <Navbar.Collapse id='my-nav'>
-                <Nav className='ml-auto'>
-                    <Nav.Link as={Link} to='/'>Home</Nav.Link>
-                    <NavDropdown title="More">
-                        <NavDropdown.Item 
-                        as={Link} 
-                        to='/booksearch'>
-                            Add Notes to Book
-                        </NavDropdown.Item>
-                        <NavDropdown.Item 
-                        as={Link} 
-                        to='/notespage'>
-                            My Notes 
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+<Navbar bg="dark" variant="dark" expand="lg">
+  <Navbar.Brand as={Link} to="/">
+    <img src={logo} alt="brain logo" width="30" height="30" />
+    Second Brain
+  </Navbar.Brand>
+  <Navbar.Toggle aria-controls="navbar-nav" />
+  <Navbar.Collapse id="navbar-nav">
+    <Nav justify="true" defaultActiveKey="/" variant="tabs">
+      <Nav.Item>
+        <Nav.Link as={Link} to="/" eventKey="/">
+          Home
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/booksearch" eventKey="/booksearch">
+          Add Notes
+        </Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link as={Link} to="/notespage" eventKey="/notespage">
+          My Notes
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+
     </>
   )
 }

@@ -108,13 +108,18 @@ select {
   font-size: 18px;
 }
 
-#my-nav {
-  margin-left: 2%;
+.navbar {
+  height: 6%;
+  padding-bottom: 0 !important;
 }
 
 .nav-link {
   font-family: 'Pathway Gothic One', sans-serif;
   font-size: 1rem !important;
+}
+
+.nav-item {
+  vertical-align: bottom !important;
 }
 
 .btn {
@@ -123,10 +128,12 @@ select {
 
 .navbar-brand {
   font-size: 1.5rem !important;
+  margin-right: 2rem !important;
+  padding-bottom: 0 !important;
 }
 
 .navbar-brand > img {
-  margin: 0 5%;
+  margin: 0 5% 5% 5%
 }
 
 .display-note-container,
@@ -168,4 +175,13 @@ select {
 
 .card-back {
   transform: rotateY(180deg);
+}
+
+.nav-tabs .nav-link.active{
+  background-color: #ffffff45 !important;
+}
+
+.nav-tabs{
+  width: 33%;
+  border-bottom: none !important;
 }
