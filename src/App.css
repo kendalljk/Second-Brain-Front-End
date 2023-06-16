@@ -177,3 +177,7 @@ select {
 .modal-transition.fade .modal-dialog {
   transform: scale(0.8);
 }
+
+.note-text {
+  font-family: 'Pathway Gothic One', sans-serif !important;
+}

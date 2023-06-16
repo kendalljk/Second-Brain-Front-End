@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
 const NotesPage = ({ noteCollection }) => {
@@ -55,14 +54,12 @@ const NotesPage = ({ noteCollection }) => {
                       }}
                     >
                       <Card.Title as="h6">{book.title}</Card.Title>
-                      <Card.Text>
-                        <div>By: {book.author}</div>
-                        {book.finished ? (
-                          <div className="py-2">
-                            Finished: {book.dateFinished}
-                          </div>
-                        ) : null}
-                      </Card.Text>
+                      <div className="note-text">By: {book.author}</div>
+                      {book.finished && (
+                        <div className="note-text py-2">
+                          Finished: {book.dateFinished}
+                        </div>
+                      )}
                     </Card.Body>
                   </div>
                   <div className="card-back">
@@ -73,32 +70,30 @@ const NotesPage = ({ noteCollection }) => {
                         overflowY: "auto",
                       }}
                     >
-                      <Card.Text>
-                        <div>
-                          <h6>Book Summary:</h6>
-                          {book.bookSummary
-                            .split("\n\n")
-                            .map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
-                            ))}
+                      <h6>Book Summary:</h6>
+                      {book.bookSummary
+                        .split("\n\n")
+                        .map((paragraph, index) => (
+                          <div className="note-text" key={index}>
+                            {paragraph}
+                          </div>
+                        ))}
+                      <br />
+                      <h6>Favorite Quotes, Passages:</h6>
+                      {book.favoriteQuotes
+                        .split("\n\n")
+                        .map((paragraph, index) => (
+                          <div className="note-text" key={index}>
+                            {paragraph}
+                          </div>
+                        ))}
+                      <br />
+                      <h6>My Thoughts, Notes:</h6>
+                      {book.myThoughts.split("\n\n").map((paragraph, index) => (
+                        <div className="note-text" key={index}>
+                          {paragraph}
                         </div>
-                        <div>
-                          <h6>Favorite Quotes, Passages:</h6>
-                          {book.favoriteQuotes
-                            .split("\n\n")
-                            .map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
-                            ))}
-                        </div>
-                        <div>
-                          <h6>Favorite Quotes, Passages:</h6>
-                          {book.myThoughts
-                            .split("\n\n")
-                            .map((paragraph, index) => (
-                              <p key={index}>{paragraph}</p>
-                            ))}
-                        </div>
-                      </Card.Text>
+                      ))}
                     </Card.Body>
                   </div>
                 </Card>

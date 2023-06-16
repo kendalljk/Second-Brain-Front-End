@@ -56,9 +56,7 @@ const BookList = ({ bookData, myNote, setMyNote }) => {
                   justifyContent: "center",
                 }}
               >
-                <Card.Title as="h6" className="card-title">
-                  {book.title}
-                </Card.Title>
+                <Card.Title as="h6">{book.title}</Card.Title>
                 <Card.Text>By: {book.author}</Card.Text>
               </Card.Body>
               <Button variant="outline-primary" onClick={() => navToNote(book)}>
