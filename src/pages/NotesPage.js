@@ -2,9 +2,13 @@ import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
+import { Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const NotesPage = ({ noteCollection }) => {
   const [flippedStates, setFlippedStates] = useState({});
+  const navigate = useNavigate();
 
   const handleClick = (key) => {
     setFlippedStates((prevStates) => ({
@@ -13,6 +17,10 @@ const NotesPage = ({ noteCollection }) => {
     }));
   };
   //toggles notes to flip/ unflip
+
+  const navigator = (e) => {
+    navigate("/booksearch");
+  };
 
   return (
     <Container fluid="true">
@@ -100,11 +108,29 @@ const NotesPage = ({ noteCollection }) => {
             </Col>
           ))
         ) : (
-          <Container>
-            <Row>
-              <h2>There are no notes to display yet- get reading!</h2>
-            </Row>
-          </Container>
+            <Alert
+              show="true"
+              variant="warning"
+              style={{
+                width: "30%",
+                textAlign: "center",
+
+              }}
+            >
+            <Alert.Heading>No Notes Found</Alert.Heading>
+            <p>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+              eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
+              amet fermentum.
+            </p>
+            <hr />
+            <div className="d-flex justify-content-end">
+              <Button onClick={navigator} variant="outline-success">
+                Close me
+              </Button>
+            </div>
+            </Alert>
+            {/* Displays an alert if no notes made yet && redirects back to search page */}
         )}
       </Row>
     </Container>

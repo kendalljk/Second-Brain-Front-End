@@ -24,7 +24,7 @@ const initialNote = {
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [bookData, setBookData] = useState([]); // ensures that booksearch buttons only appear when bookData is stored in state
+  const [bookData, setBookData] = useState([]); //booksearch buttons only appear when length > 0
   const [myNote, setMyNote] = useState(initialNote);
   const [noteCollection, setNoteCollection] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []

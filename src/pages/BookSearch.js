@@ -19,7 +19,7 @@ const BookSearch = ({ bookData, setBookData }) => {
 
   useEffect(() => {
     return () => {
-      setBookData([]); // Clear bookData array when component unmounts
+      setBookData([]); // Clears bookData array when component unmounts so buttons dissappear when no books are displayed
     };
   }, []);
 
@@ -104,6 +104,7 @@ const BookSearch = ({ bookData, setBookData }) => {
           </Button>
         </div>
       )}
+      {/* div containing buttons only appears if books are being displayed */}
       <Row className="justify-content-center">
         <Col xs="6">
           <h6 className="text-center formTitle">Search for Book</h6>
