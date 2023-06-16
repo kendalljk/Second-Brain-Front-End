@@ -57,6 +57,8 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  margin-bottom: 0 !important;
+  font-size: larger;
 }
 
 .homepage-background {
@@ -136,6 +138,10 @@ select {
   height: 80%;
 }
 
+.container {
+  padding: 0 !important;
+}
+
 .card-container {
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -177,12 +183,15 @@ select {
 .summary {
   width: 95%;
   margin: auto;
+  padding-top: 2%;
   text-align: center;
+  height: 6rem;
+ overflow-y: auto; 
 }
 
 .finished {
-  margin-left: 3%;
   color: goldenrod;
+  height: 2rem;
 }
 
 .booklist-button {

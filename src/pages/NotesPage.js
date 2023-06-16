@@ -15,8 +15,9 @@ const NotesPage = ({ noteCollection }) => {
   //toggles notes to flip/ unflip
 
   return (
-    <Container>
-      <Row className="mt-3">
+    <Container fluid="true">
+      {/* this allows the row to extend to the full width of the container */}
+      <Row className="d-flex justify-content-center mt-3">
         {noteCollection.length ? (
           noteCollection.map((book) => (
             <Col
@@ -37,17 +38,17 @@ const NotesPage = ({ noteCollection }) => {
                   height: "24rem",
                 }}
               >
-                {book.finished && (
-                  <div className="finished note-text">
-                    Finished: {book.dateFinished}
-                  </div>
-                )}
                 <div className="card-front text-center">
+                  {book.finished && (
+                    <div className="finished note-text">
+                      Finished: {book.dateFinished}
+                    </div>
+                  )}
                   <Card.Img
                     src={book.coverArtUrl}
                     alt={book.title}
                     style={{
-                      marginTop: "2rem",
+                      marginTop: book.finished ? "0" : "2rem",
                       width: "60%",
                       height: "12rem",
                     }}
@@ -61,7 +62,8 @@ const NotesPage = ({ noteCollection }) => {
                     }}
                   >
                     <Card.Title as="h6">{book.title}</Card.Title>
-                    <div className="note-text">By: {book.author}</div>
+                    <div className="author note-text">By: {book.author}</div>
+
                     {book.bookSummary.split("\n\n").map((paragraph, index) => (
                       <div className="summary note-text" key={index}>
                         {paragraph}
