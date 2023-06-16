@@ -112,7 +112,7 @@ const BookSearch = ({ bookData, setBookData }) => {
                 onChange={handleInputChange}
               />
             </Form.Group>
-            <Button className="searchBtn" variant="primary" type="submit">
+            <Button className="search-button" variant="primary" type="submit">
               Search
             </Button>
           </Form>
