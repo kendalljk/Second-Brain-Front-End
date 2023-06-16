@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Container, Row, Col } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import leftArrow from "../icons/left-arrow.png";
+import rightArrow from "../icons/right-arrow.png";
 
 const BookSearch = ({ bookData, setBookData }) => {
   const { title } = useParams();
@@ -15,6 +17,12 @@ const BookSearch = ({ bookData, setBookData }) => {
     authorName: "",
   });
 
+  useEffect(() => {
+    return () => {
+      setBookData([]); // Clear bookData array when component unmounts
+    };
+  }, []);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({
@@ -22,6 +30,8 @@ const BookSearch = ({ bookData, setBookData }) => {
       [name]: value,
     }));
   };
+
+  console.log("book data", bookData);
 
   const fetchBook = async (e) => {
     e.preventDefault();
@@ -84,6 +94,16 @@ const BookSearch = ({ bookData, setBookData }) => {
   return (
     <Container className="">
       <Outlet bookData={bookData} />
+      {bookData.length > 0 && (
+        <div className="d-flex justify-content-center my-3">
+          <Button className="booklist-button">
+            <img src={leftArrow} alt="left arrow" />
+          </Button>
+          <Button className="booklist-button">
+            <img src={rightArrow} alt="right arrow" />
+          </Button>
+        </div>
+      )}
       <Row className="justify-content-center">
         <Col xs="6">
           <h6 className="text-center formTitle">Search for Book</h6>

@@ -1,13 +1,13 @@
-import './App.css';
-import {Routes, Route} from 'react-router-dom'
-import CreateNote from './pages/CreateNote';
-import Homepage from './pages/Homepage';
-import Navigation  from './components/Navigation';
-import { useState } from 'react';
-import BookList from './pages/BookList';
-import BookSearch from './pages/BookSearch';
-import { useEffect } from 'react';
-import NotesPage from './pages/NotesPage';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import CreateNote from "./pages/CreateNote";
+import Homepage from "./pages/Homepage";
+import Navigation from "./components/Navigation";
+import { useState } from "react";
+import BookList from "./pages/BookList";
+import BookSearch from "./pages/BookSearch";
+import { useEffect } from "react";
+import NotesPage from "./pages/NotesPage";
 
 const initialNote = {
   key: "",
@@ -20,27 +20,72 @@ const initialNote = {
   bookSummary: "",
   favoriteQuotes: [],
   myThoughts: [],
-}
+};
 
 function App() {
-  const [bookData, setBookData] = useState([]);
-  const [myNote, setMyNote]= useState(initialNote);
-  const [noteCollection, setNoteCollection] = useState(() => JSON.parse(localStorage.getItem('notes')) || [])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookData, setBookData] = useState([]); // ensures that booksearch buttons only appear when bookData is stored in state
+  const [myNote, setMyNote] = useState(initialNote);
+  const [noteCollection, setNoteCollection] = useState(
+    () => JSON.parse(localStorage.getItem("notes")) || []
+  );
+
+  const handlePageChange = (direction) => {
+    if (direction === "next" && bookData.length === 5) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else if (direction === "previous" && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(noteCollection))
-}, [noteCollection])
+    localStorage.setItem("notes", JSON.stringify(noteCollection));
+  }, [noteCollection]);
 
   return (
     <>
-      <Navigation/>
+      <Navigation />
       <Routes>
-        <Route path="/" element={<Homepage/>} />
-        <Route path="/booksearch" element={<BookSearch bookData={bookData} setBookData={setBookData}/>}>
-          <Route path="/booksearch/:query" element={<BookList bookData={bookData} myNote={myNote} setMyNote={setMyNote} />}/>
+        <Route path="/" element={<Homepage />} />
+        <Route
+          path="/booksearch"
+          element={
+            <BookSearch
+              bookData={bookData}
+              setBookData={setBookData}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          }
+        >
+          <Route
+            path="/booksearch/:query"
+            element={
+              <BookList
+                bookData={bookData}
+                myNote={myNote}
+                setMyNote={setMyNote}
+                handlePageChange={handlePageChange}
+              />
+            }
+          />
         </Route>
-        <Route path="/notespage" element={<NotesPage noteCollection={noteCollection}/>}/>
-        <Route path="/createnote/*" element={<CreateNote bookData={bookData} myNote={myNote} setMyNote={setMyNote} noteCollection={noteCollection} setNoteCollection={setNoteCollection}/>}/>
+        <Route
+          path="/notespage"
+          element={<NotesPage noteCollection={noteCollection} />}
+        />
+        <Route
+          path="/createnote/*"
+          element={
+            <CreateNote
+              bookData={bookData}
+              myNote={myNote}
+              setMyNote={setMyNote}
+              noteCollection={noteCollection}
+              setNoteCollection={setNoteCollection}
+            />
+          }
+        />
       </Routes>
     </>
   );

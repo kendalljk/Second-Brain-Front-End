@@ -3,8 +3,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
-import leftArrow from "../icons/left-arrow.png";
-import rightArrow from "../icons/right-arrow.png";
 
 const BookList = ({ bookData, myNote, setMyNote }) => {
   const navigate = useNavigate();
@@ -68,14 +66,6 @@ const BookList = ({ bookData, myNote, setMyNote }) => {
           </Col>
         ))}
       </Row>
-      <div className="d-flex justify-content-center my-3">
-        <Button className="booklist-button">
-          <img src={leftArrow} alt="left arrow" />
-        </Button>
-        <Button className="booklist-button">
-          <img src={rightArrow} alt="right arrow" />
-        </Button>
-      </div>
     </Container>
   );
 };
