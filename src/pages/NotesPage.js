@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const NotesPage = ({ noteCollection }) => {
   const [flippedStates, setFlippedStates] = useState({});
+
   const navigate = useNavigate();
 
   const handleClick = (key) => {
@@ -115,7 +116,7 @@ const NotesPage = ({ noteCollection }) => {
         ) : (
           <Alert
             id="myAlert"
-            show="true"
+            show={true}
             variant="warning"
             style={{
               width: "30%",

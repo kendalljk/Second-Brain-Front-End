@@ -1,10 +1,12 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../icons/logo.png";
 import { Offcanvas } from "react-bootstrap";
 
 export const Navigation = () => {
+  const location = useLocation();
+
   return (
     <>
       <Navbar
@@ -34,7 +36,11 @@ export const Navigation = () => {
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Second Brain</Offcanvas.Title>
           </Offcanvas.Header>
-          <Nav justify="true" defaultActiveKey="/" variant="tabs">
+          <Nav
+            justify="true"
+            activeKey={location.pathname} //activekey updates each time location.pathname changes (vs defaultActiveKey)
+            variant="tabs"
+          >
             <Nav.Item>
               <Nav.Link as={Link} to="/" eventKey="/">
                 Home

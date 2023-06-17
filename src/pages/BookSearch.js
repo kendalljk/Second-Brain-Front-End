@@ -92,10 +92,17 @@ const BookSearch = ({ bookData, setBookData }) => {
   };
 
   return (
-    <Container className="">
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Outlet bookData={bookData} />
       {bookData.length > 0 && (
-        <div className="d-flex justify-content-center my-3">
+        <div className="d-flex justify-content-center mt-3">
           <Button className="booklist-button">
             <img src={leftArrow} alt="left arrow" />
           </Button>
@@ -105,40 +112,52 @@ const BookSearch = ({ bookData, setBookData }) => {
         </div>
       )}
       {/* div containing buttons only appears if books are being displayed */}
-      <Row className="justify-content-center">
-        <Col xs="6">
-          <h6 className="text-center formTitle">Search for Book</h6>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col className="text-center" xs="6">
-          <Form className="bookSearchForm" onSubmit={fetchBook}>
-            <Form.Group className="" controlId="formBookTitle">
-              <Form.Control
-                className="mt-3"
-                type="text"
-                name="bookTitle"
-                placeholder="Title"
-                value={formState.bookTitle}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Form.Group className="" controlId="formAuthorName">
-              <Form.Control
-                className="mt-3"
-                type="text"
-                name="authorName"
-                placeholder="Author"
-                value={formState.authorName}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-            <Button className="search-button" variant="primary" type="submit">
+      <div
+        className="justify-content-center"
+        style={{
+          width: "50%",
+        }}
+      >
+        <h6 className="text-center formTitle">Search for Book</h6>
+        <Form
+          className="bookSearchForm"
+          onSubmit={fetchBook}
+          style={{
+            boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
+            height: "50%",
+          }}
+        >
+          <Form.Group className="" controlId="formBookTitle">
+            <Form.Control
+              className="mt-3"
+              type="text"
+              name="bookTitle"
+              placeholder="Title"
+              value={formState.bookTitle}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <Form.Group className="" controlId="formAuthorName">
+            <Form.Control
+              className="mt-3"
+              type="text"
+              name="authorName"
+              placeholder="Author"
+              value={formState.authorName}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+          <div className="text-center">
+            <Button
+              className="search-button my-4"
+              variant="primary"
+              type="submit"
+            >
               Search
             </Button>
-          </Form>
-        </Col>
-      </Row>
+          </div>
+        </Form>
+      </div>
     </Container>
   );
 };
