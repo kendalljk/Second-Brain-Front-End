@@ -19,8 +19,13 @@ const NotesPage = ({ noteCollection }) => {
   //toggles notes to flip/ unflip
 
   const navigator = (e) => {
-    navigate("/booksearch");
-  };
+    const myAlert = document.getElementById("myAlert");
+    myAlert.classList.add("fadeOutLeft");
+
+    setTimeout(() => {
+      navigate("/booksearch");
+    }, 1000);
+  }; //delays navigation until classlist able to be added
 
   return (
     <Container fluid="true">
@@ -108,29 +113,30 @@ const NotesPage = ({ noteCollection }) => {
             </Col>
           ))
         ) : (
-            <Alert
-              show="true"
-              variant="warning"
-              style={{
-                width: "30%",
-                textAlign: "center",
-
-              }}
-            >
-            <Alert.Heading>No Notes Found</Alert.Heading>
+          <Alert
+            id="myAlert"
+            show="true"
+            variant="warning"
+            style={{
+              width: "30%",
+              textAlign: "center",
+              boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
+            }}
+          >
+            <Alert.Heading>No notes to display yet!</Alert.Heading>
             <p>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-              eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
-              amet fermentum.
+              Unlock your potential through the transformative power of reading
+              and learning from the wisdom of others. Search for books, add your
+              insightful notes, and embark on a journey of enriching your mind
+              and enhancing your learning.
             </p>
             <hr />
             <div className="d-flex justify-content-end">
               <Button onClick={navigator} variant="outline-success">
-                Close me
+                Add Note
               </Button>
             </div>
-            </Alert>
-            {/* Displays an alert if no notes made yet && redirects back to search page */}
+          </Alert>
         )}
       </Row>
     </Container>
