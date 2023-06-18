@@ -123,7 +123,7 @@ const BookSearch = ({ bookData, setBookData }) => {
           className="bookSearchForm"
           onSubmit={fetchBook}
           style={{
-            boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
+            boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.2)",
             height: "50%",
           }}
         >

@@ -31,7 +31,7 @@ const NotesPage = ({ noteCollection }) => {
   return (
     <Container fluid="true">
       {/* this allows the row to extend to the full width of the container */}
-      <Row className="d-flex justify-content-center mt-3">
+      <Row className="d-flex justify-content-center text-align-center mt-3">
         {noteCollection.length ? (
           noteCollection.map((book) => (
             <Col
@@ -122,7 +122,8 @@ const NotesPage = ({ noteCollection }) => {
             style={{
               width: "30%",
               textAlign: "center",
-              boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
+              boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.2)",
+              marginTop: "10%",
             }}
           >
             <Alert.Heading>No notes to display yet!</Alert.Heading>
