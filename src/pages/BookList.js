@@ -36,6 +36,7 @@ const BookList = ({ bookData, myNote, setMyNote }) => {
               style={{
                 width: "12rem",
                 height: "21rem",
+                boxShadow: "5px 2px 5px 2px rgba(0, 0, 0, 0.1)",
               }}
             >
               <Card.Img

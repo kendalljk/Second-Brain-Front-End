@@ -50,6 +50,7 @@ const NotesPage = ({ noteCollection }) => {
                 style={{
                   width: "18rem",
                   height: "24rem",
+                  boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
                 }}
               >
                 <div className="card-front text-center">

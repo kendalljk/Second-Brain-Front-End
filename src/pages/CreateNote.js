@@ -68,7 +68,11 @@ const CreateNote = ({
         <Col className="display-note-col d-flex justify-content-center text-center">
           <Card
             className="display-note-bookCard"
-            style={{ width: "20rem", height: "30rem" }}
+            style={{
+              width: "20rem",
+              height: "38rem",
+              boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
+            }}
           >
             <Card.Img
               className="displayNoteImg"
@@ -85,7 +89,7 @@ const CreateNote = ({
         </Col>
         <Col className="display-note-col">
           <Form className="displayNoteForm" onSubmit={handleSubmit}>
-            <Form.Label as="h6" className="">
+            <Form.Label as="h6" className="mt-0">
               Book Genre:
             </Form.Label>
             <Form.Select
