@@ -6,7 +6,17 @@ import { Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const TBRList = () => {
+const TBRList = ({ noteCollection }) => {
+  const navigator = (e) => {
+    const myAlert = document.getElementById("myAlert");
+    myAlert.classList.add("fadeOutLeft");
+
+    setTimeout(() => {
+      navigate("/booksearch");
+    }, 1000);
+  }; //delays navigation until classlist able to be added
+
+  return (
     <Container fluid="true">
       {/* this allows the row to extend to the full width of the container */}
       <Row className="d-flex justify-content-center text-align-center mt-3">
