@@ -56,6 +56,11 @@ export const Navigation = () => {
                 My Notes
               </Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} to="/TBR_List" eventKey="/TBRList">
+                My TBR List
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </Navbar.Offcanvas>
       </Navbar>

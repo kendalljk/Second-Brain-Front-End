@@ -8,6 +8,7 @@ import BookList from "./pages/BookList";
 import BookSearch from "./pages/BookSearch";
 import { useEffect } from "react";
 import NotesPage from "./pages/NotesPage";
+import TBRList from "./pages/TBRList";
 
 const initialNote = {
   key: "",
@@ -78,6 +79,7 @@ function App() {
             />
           }
         />
+        <Route path="/TBR_List/*" element={<TBRList bookData={bookData} />} />
       </Routes>
     </>
   );
