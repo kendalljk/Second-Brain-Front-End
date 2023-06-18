@@ -48,7 +48,7 @@ export const Navigation = () => {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={Link} to="/booksearch" eventKey="/booksearch">
-                Add Notes
+                Search Books
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>

@@ -23,20 +23,12 @@ const initialNote = {
 };
 
 function App() {
-  const [currentPage, setCurrentPage] = useState(1);
   const [bookData, setBookData] = useState([]); //booksearch buttons only appear when length > 0
+  const [bookIndex, setBookIndex] = useState(0); // ensures displays first result each time
   const [myNote, setMyNote] = useState(initialNote);
   const [noteCollection, setNoteCollection] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []
   );
-
-  const handlePageChange = (direction) => {
-    if (direction === "next" && bookData.length === 5) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    } else if (direction === "previous" && currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(noteCollection));
@@ -53,8 +45,8 @@ function App() {
             <BookSearch
               bookData={bookData}
               setBookData={setBookData}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
+              bookIndex={bookIndex}
+              setBookIndex={setBookIndex}
             />
           }
         >
@@ -65,7 +57,7 @@ function App() {
                 bookData={bookData}
                 myNote={myNote}
                 setMyNote={setMyNote}
-                handlePageChange={handlePageChange}
+                bookIndex={bookIndex}
               />
             }
           />

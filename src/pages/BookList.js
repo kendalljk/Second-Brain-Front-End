@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 
-const BookList = ({ bookData, myNote, setMyNote }) => {
+const BookList = ({ bookData, bookIndex, myNote, setMyNote }) => {
   const navigate = useNavigate();
 
   const navToNote = (book) => {
@@ -29,7 +29,7 @@ const BookList = ({ bookData, myNote, setMyNote }) => {
   return (
     <Container className="text-center">
       <Row className="d-flex justify-content-center">
-        {bookData.map((book) => (
+        {bookData.slice(bookIndex, bookIndex + 5).map((book) => (
           <Col className="d-flex justify-content-center" key={book.key}>
             <Card
               className="bookCard"

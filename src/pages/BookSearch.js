@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { Container, Row, Col } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Container, Form, Button } from "react-bootstrap";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import leftArrow from "../icons/left-arrow.png";
 import rightArrow from "../icons/right-arrow.png";
 
-const BookSearch = ({ bookData, setBookData }) => {
+const BookSearch = ({ bookData, setBookData, bookIndex, setBookIndex }) => {
   const { title } = useParams();
   const navigate = useNavigate();
 
@@ -29,6 +25,14 @@ const BookSearch = ({ bookData, setBookData }) => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleNextClick = () => {
+    setBookIndex((prevIndex) => Math.min(prevIndex + 5, bookData.length - 5));
+  };
+
+  const handlePrevClick = () => {
+    setBookIndex((prevIndex) => Math.max(prevIndex - 5, 0));
   };
 
   console.log("book data", bookData);
@@ -77,8 +81,8 @@ const BookSearch = ({ bookData, setBookData }) => {
           });
         }
       }
-      const firstFiveBooks = bookDataWithCover.slice(0, 5);
-      setBookData(firstFiveBooks);
+      setBookData(bookDataWithCover);
+      setBookIndex(0);
 
       navigate(`/booksearch/${bookTitle ? bookTitle : authorName}`);
     } catch (error) {
@@ -104,9 +108,9 @@ const BookSearch = ({ bookData, setBookData }) => {
       {bookData.length > 0 && (
         <div className="d-flex justify-content-center mt-3">
           <Button className="booklist-button">
-            <img src={leftArrow} alt="left arrow" />
+            <img src={leftArrow} alt="left arrow" onClick={handlePrevClick} />
           </Button>
-          <Button className="booklist-button">
+          <Button className="booklist-button" onClick={handleNextClick}>
             <img src={rightArrow} alt="right arrow" />
           </Button>
         </div>
