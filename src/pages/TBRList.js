@@ -22,7 +22,7 @@ const TBRList = ({ toReadList }) => {
   return (
     <Container fluid="true">
       {/* this allows the row to extend to the full width of the container */}
-      <Row className="d-flex justify-content-left text-align-center mt-3 mx-3">
+      <Row className="d-flex justify-content-center text-align-center mt-3">
         {toReadList.length ? (
           toReadList.map((book) => (
             <Col

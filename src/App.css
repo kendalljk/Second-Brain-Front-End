@@ -250,3 +250,10 @@ select {
   animation-delay: 2s ;
   animation-fill-mode: forwards;
 }
+
+.expanded {
+  animation-delay: 1s !important;
+  width: 6rem !important;
+  border-radius: 5% !important;
+  transition: width 0.3s ease !important;
+}

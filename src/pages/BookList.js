@@ -13,8 +13,6 @@ const BookList = ({
   setToReadList,
 }) => {
   const navigate = useNavigate();
-  const [showAlert, setShowAlert] = useState(false);
-
   const navToNote = (book) => {
     const selectedBookData = {
       key: book.key,
@@ -30,6 +28,7 @@ const BookList = ({
     navigate(`/createnote/${encodeURIComponent(book.title)}`);
   };
 
+  const [showAlert, setShowAlert] = useState(false);
   const addToTBR = (book) => {
     const selectedBookData = {
       key: book.key,
@@ -43,6 +42,29 @@ const BookList = ({
       setShowAlert(false);
     }, 3000);
   };
+
+  const [buttonMessage, setButtonMessage] = useState("");
+  const [hoveredBook, setHoveredBook] = useState(null);
+  const handleMouseEnter = (key) => {
+    setHoveredBook(key);
+    document.getElementById(`addToTBR-${key}`).classList.add("expanded");
+    setTimeout(() => {
+      setButtonMessage("Add to TBR");
+    }, 200);
+  };
+  //expands first, then displays message
+
+  const handleMouseLeave = (key) => {
+    setHoveredBook(null);
+    const button = document.getElementById(`addToTBR-${key}`);
+    if (button) {
+      setButtonMessage("");
+    }
+    setTimeout(() => {
+      button.classList.remove("expanded");
+    }, 200);
+  };
+  //removes message first, then expanded
 
   return (
     <Container className="text-center">
@@ -91,9 +113,11 @@ const BookList = ({
                 <Card.Text>By: {book.author}</Card.Text>
               </Card.Body>
               <Button
-                id="addToTBR"
+                id={`addToTBR-${book.key}`} // ensures styling applies to specific button hovered over
                 variant="outline-primary"
                 onClick={() => addToTBR(book)}
+                onMouseEnter={() => handleMouseEnter(book.key)}
+                onMouseLeave={() => handleMouseLeave(book.key)}
                 style={{
                   position: "absolute",
                   top: "2%",
@@ -102,7 +126,8 @@ const BookList = ({
                   width: "2rem",
                   height: "2rem",
                   borderRadius: "100%",
-                  backgroundColor: "#D1ECFF82",
+                  backgroundColor: "#08090AC1",
+                  textAlign: "left",
                 }}
               >
                 <img
@@ -116,6 +141,7 @@ const BookList = ({
                     width: "2rem",
                   }}
                 />
+                {hoveredBook === book.key && buttonMessage}
               </Button>
               <Button variant="outline-primary" onClick={() => navToNote(book)}>
                 Select

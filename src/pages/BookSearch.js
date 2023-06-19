@@ -118,7 +118,7 @@ const BookSearch = ({ bookData, setBookData, bookIndex, setBookIndex }) => {
       <div
         className="justify-content-center"
         style={{
-          width: "25%",
+          width: "40%",
           marginTop: bookData.length > 0 ? "3rem" : "11%",
         }}
       >
