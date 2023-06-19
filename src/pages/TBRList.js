@@ -6,7 +6,9 @@ import { Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const TBRList = ({ noteCollection }) => {
+const TBRList = ({ toReadList }) => {
+  const navigate = useNavigate();
+
   const navigator = (e) => {
     const myAlert = document.getElementById("myAlert");
     myAlert.classList.add("fadeOutLeft");
@@ -20,21 +22,15 @@ const TBRList = ({ noteCollection }) => {
     <Container fluid="true">
       {/* this allows the row to extend to the full width of the container */}
       <Row className="d-flex justify-content-center text-align-center mt-3">
-        {noteCollection.length ? (
-          noteCollection.map((book) => (
+        {toReadList.length ? (
+          TBRList.map((book) => (
             <Col
-              className="flippable-card m-2"
-              onClick={() => handleClick(book.key)}
-              key={book.key}
               style={{
                 width: "20rem",
                 flex: "none",
               }}
             >
               <Card
-                className={`card-container ${
-                  flippedStates[book.key] ? "flipped" : ""
-                }`}
                 style={{
                   width: "18rem",
                   height: "24rem",
@@ -74,31 +70,6 @@ const TBRList = ({ noteCollection }) => {
                     ))}
                   </Card.Body>
                 </div>
-                <div className="card-back">
-                  <Card.Body
-                    style={{
-                      width: "18rem",
-                      height: "24rem",
-                      overflowY: "auto",
-                    }}
-                  >
-                    <h6>Favorite Quotes, Passages:</h6>
-                    {book.favoriteQuotes
-                      .split("\n\n")
-                      .map((paragraph, index) => (
-                        <div className="note-text" key={index}>
-                          {paragraph}
-                        </div>
-                      ))}
-                    <br />
-                    <h6>My Thoughts, Notes:</h6>
-                    {book.myThoughts.split("\n\n").map((paragraph, index) => (
-                      <div className="note-text" key={index}>
-                        {paragraph}
-                      </div>
-                    ))}
-                  </Card.Body>
-                </div>
               </Card>
             </Col>
           ))
@@ -114,7 +85,7 @@ const TBRList = ({ noteCollection }) => {
               marginTop: "10%",
             }}
           >
-            <Alert.Heading>No notes to display yet!</Alert.Heading>
+            <Alert.Heading>No books to display yet!</Alert.Heading>
             <p>
               Unlock your potential through the transformative power of reading
               and learning from the wisdom of others. Search for books, add your

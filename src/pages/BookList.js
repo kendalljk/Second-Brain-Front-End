@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 
-const BookList = ({ bookData, bookIndex, myNote, setMyNote }) => {
+const BookList = ({ bookData, bookIndex, myNote, setMyNote, setToReadList }) => {
   const navigate = useNavigate();
 
   const navToNote = (book) => {
@@ -21,6 +21,10 @@ const BookList = ({ bookData, bookIndex, myNote, setMyNote }) => {
     }));
     navigate(`/createnote/${encodeURIComponent(book.title)}`);
   };
+
+  const addToTBR = (book) => {
+    
+  }
 
   useEffect(() => {
     console.log("My Note:", myNote);
@@ -61,6 +65,9 @@ const BookList = ({ bookData, bookIndex, myNote, setMyNote }) => {
                 <Card.Text>By: {book.author}</Card.Text>
               </Card.Body>
               <Button variant="outline-primary" onClick={() => navToNote(book)}>
+                Select
+              </Button>
+              <Button variant="outline-primary" onClick={addToTBR}>
                 Select
               </Button>
             </Card>
