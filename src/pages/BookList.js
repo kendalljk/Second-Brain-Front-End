@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Container, Col, Row, Alert } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
+import addIcon from "../icons/add-icon.png";
 
 const BookList = ({
   bookData,
@@ -12,6 +13,7 @@ const BookList = ({
   setToReadList,
 }) => {
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
 
   const navToNote = (book) => {
     const selectedBookData = {
@@ -36,11 +38,26 @@ const BookList = ({
       coverArtUrl: book.coverArtUrl,
     };
     setToReadList((prevReadList) => [...prevReadList, selectedBookData]);
-    navigate(`/TBR_List/`);
+    setShowAlert(true);
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 3000);
   };
 
   return (
     <Container className="text-center">
+      {showAlert && (
+        <Alert
+          className="fadeOutRight"
+          variant="success"
+          onClose={() => {
+            setShowAlert(false);
+          }}
+          dismissible={true}
+        >
+          Book was added to your TBR list!
+        </Alert>
+      )}
       <Row className="d-flex justify-content-center">
         {bookData.slice(bookIndex, bookIndex + 5).map((book) => (
           <Col className="d-flex justify-content-center" key={book.key}>
@@ -73,10 +90,34 @@ const BookList = ({
                 <Card.Title as="h6">{book.title}</Card.Title>
                 <Card.Text>By: {book.author}</Card.Text>
               </Card.Body>
-              <Button variant="outline-primary" onClick={() => navToNote(book)}>
-                Select
+              <Button
+                id="addToTBR"
+                variant="outline-primary"
+                onClick={() => addToTBR(book)}
+                style={{
+                  position: "absolute",
+                  top: "2%",
+                  right: "5%",
+                  border: "none",
+                  width: "2rem",
+                  height: "2rem",
+                  borderRadius: "100%",
+                  backgroundColor: "#D1ECFF82",
+                }}
+              >
+                <img
+                  src={addIcon}
+                  alt="Add to Read List"
+                  style={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                    height: "2rem",
+                    width: "2rem",
+                  }}
+                />
               </Button>
-              <Button variant="outline-primary" onClick={() => addToTBR(book)}>
+              <Button variant="outline-primary" onClick={() => navToNote(book)}>
                 Select
               </Button>
             </Card>

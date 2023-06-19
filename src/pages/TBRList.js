@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const TBRList = ({ toReadList }) => {
   const navigate = useNavigate();
-  const [hideAlert, setHideAlert] = useState(false);
-
   console.log("To Read List:", toReadList);
 
   const goToBookSearch = (e) => {
@@ -24,20 +22,21 @@ const TBRList = ({ toReadList }) => {
   return (
     <Container fluid="true">
       {/* this allows the row to extend to the full width of the container */}
-      <Row className="d-flex justify-content-center text-align-center mt-3">
+      <Row className="d-flex justify-content-left text-align-center mt-3 mx-3">
         {toReadList.length ? (
           toReadList.map((book) => (
             <Col
               key={book.key}
               style={{
-                width: "20rem",
+                width: "14rem",
+                height: "19rem",
                 flex: "none",
               }}
             >
               <Card
                 style={{
                   width: "12rem",
-                  height: "16rem",
+                  height: "18rem",
                   boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
                 }}
               >

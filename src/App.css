@@ -228,6 +228,25 @@ select {
 
 .fadeOutLeft {
   animation-name: fadeOutLeft;
-  animation-duration: 1s;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.fadeOutRight {
+  animation-name: fadeOutRight;
+  animation-duration: 2s;
+  animation-delay: 2s ;
   animation-fill-mode: forwards;
 }
