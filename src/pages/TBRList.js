@@ -8,8 +8,11 @@ import { useNavigate } from "react-router-dom";
 
 const TBRList = ({ toReadList }) => {
   const navigate = useNavigate();
+  const [hideAlert, setHideAlert] = useState(false);
 
-  const navigator = (e) => {
+  console.log("To Read List:", toReadList);
+
+  const goToBookSearch = (e) => {
     const myAlert = document.getElementById("myAlert");
     myAlert.classList.add("fadeOutLeft");
 
@@ -23,8 +26,9 @@ const TBRList = ({ toReadList }) => {
       {/* this allows the row to extend to the full width of the container */}
       <Row className="d-flex justify-content-center text-align-center mt-3">
         {toReadList.length ? (
-          TBRList.map((book) => (
+          toReadList.map((book) => (
             <Col
+              key={book.key}
               style={{
                 width: "20rem",
                 flex: "none",
@@ -32,23 +36,17 @@ const TBRList = ({ toReadList }) => {
             >
               <Card
                 style={{
-                  width: "18rem",
-                  height: "24rem",
+                  width: "12rem",
+                  height: "16rem",
                   boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
                 }}
               >
-                <div className="card-front text-center">
-                  {book.finished && (
-                    <div className="finished note-text">
-                      Finished: {book.dateFinished}
-                    </div>
-                  )}
+                <div className="text-center">
                   <Card.Img
                     src={book.coverArtUrl}
                     alt={book.title}
                     style={{
-                      marginTop: book.finished ? "0" : "2rem",
-                      width: "60%",
+                      width: "100%",
                       height: "12rem",
                     }}
                   />
@@ -62,12 +60,6 @@ const TBRList = ({ toReadList }) => {
                   >
                     <Card.Title as="h6">{book.title}</Card.Title>
                     <div className="author note-text">By: {book.author}</div>
-
-                    {book.bookSummary.split("\n\n").map((paragraph, index) => (
-                      <div className="summary note-text" key={index}>
-                        {paragraph}
-                      </div>
-                    ))}
                   </Card.Body>
                 </div>
               </Card>
@@ -76,7 +68,7 @@ const TBRList = ({ toReadList }) => {
         ) : (
           <Alert
             id="myAlert"
-            show={true}
+            show={true} // must be in brackets to prevent error
             variant="warning"
             style={{
               width: "30%",
@@ -94,7 +86,7 @@ const TBRList = ({ toReadList }) => {
             </p>
             <hr />
             <div className="d-flex justify-content-end">
-              <Button onClick={navigator} variant="outline-success">
+              <Button onClick={goToBookSearch} variant="outline-success">
                 Add Note
               </Button>
             </div>

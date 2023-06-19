@@ -26,7 +26,9 @@ const initialNote = {
 function App() {
   const [bookData, setBookData] = useState([]); //booksearch buttons only appear when length > 0
   const [bookIndex, setBookIndex] = useState(0); // ensures displays first result each time
-  const [toReadList, setToReadList] = useState([])
+  const [toReadList, setToReadList] = useState(
+    () => JSON.parse(localStorage.getItem("TBR")) || []
+  );
   const [myNote, setMyNote] = useState(initialNote);
   const [noteCollection, setNoteCollection] = useState(
     () => JSON.parse(localStorage.getItem("notes")) || []
@@ -35,6 +37,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(noteCollection));
   }, [noteCollection]);
+
+  useEffect(() => {
+    localStorage.setItem("TBR", JSON.stringify(toReadList));
+  }, [toReadList]);
 
   return (
     <>
@@ -60,6 +66,8 @@ function App() {
                 myNote={myNote}
                 setMyNote={setMyNote}
                 bookIndex={bookIndex}
+                toReadList={toReadList}
+                setToReadList={setToReadList}
               />
             }
           />
@@ -77,13 +85,20 @@ function App() {
               setMyNote={setMyNote}
               noteCollection={noteCollection}
               setNoteCollection={setNoteCollection}
+              toReadList={toReadList}
+              setToReadList={setToReadList}
             />
           }
         />
-        <Route path="/TBR_List/*" element={<TBRList bookData={bookData} />} />
+        <Route
+          path="/TBR_List/*"
+          element={<TBRList bookData={bookData} toReadList={toReadList} />}
+        />
       </Routes>
     </>
   );
 }
 
 export default App;
+
+localStorage.clear();

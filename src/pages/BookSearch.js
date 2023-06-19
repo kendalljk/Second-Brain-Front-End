@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import leftArrow from "../icons/left-arrow.png";
 import rightArrow from "../icons/right-arrow.png";
 
 const BookSearch = ({ bookData, setBookData, bookIndex, setBookIndex }) => {
-  const { title } = useParams();
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState({

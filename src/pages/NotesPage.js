@@ -146,3 +146,4 @@ const NotesPage = ({ noteCollection }) => {
   );
 };
 export default NotesPage;
+
