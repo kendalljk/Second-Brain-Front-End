@@ -42,7 +42,7 @@ export const Navigation = () => {
             variant="tabs"
           >
             <Nav.Item>
-              <Nav.Link as={Link} to="/" eventKey="/">
+              <Nav.Link as={Link} to="/home" eventKey="/">
                 Home
               </Nav.Link>
             </Nav.Item>
