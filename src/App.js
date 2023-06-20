@@ -1,14 +1,14 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import CreateNote from "./pages/CreateNote";
 import Homepage from "./pages/Homepage";
 import Navigation from "./components/Navigation";
-import { useState } from "react";
 import BookList from "./pages/BookList";
 import BookSearch from "./pages/BookSearch";
-import { useEffect } from "react";
 import NotesPage from "./pages/NotesPage";
 import TBRList from "./pages/TBRList";
+import LoadingPage from "./pages/LoadingPage";
 
 const initialNote = {
   key: "",
@@ -42,11 +42,17 @@ function App() {
     localStorage.setItem("TBR", JSON.stringify(toReadList));
   }, [toReadList]);
 
+  const location = useLocation();
+  const isOnLoadingPage = location.pathname === "/";
+  //sets path for loading page
+
   return (
     <>
-      <Navigation />
+      {!isOnLoadingPage && <Navigation />}
+      {/* if user is on loading page, navigation tab does not display */}
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<LoadingPage />}></Route>
+        <Route path="/home" element={<Homepage />} />
         <Route
           path="/booksearch"
           element={

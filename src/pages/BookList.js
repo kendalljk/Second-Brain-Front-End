@@ -50,7 +50,7 @@ const BookList = ({
     document.getElementById(`addToTBR-${key}`).classList.add("expanded");
     setTimeout(() => {
       setButtonMessage("Add to TBR");
-    }, 200);
+    }, 400);
   };
   //expands first, then displays message
 
@@ -62,7 +62,7 @@ const BookList = ({
     }
     setTimeout(() => {
       button.classList.remove("expanded");
-    }, 200);
+    }, 100);
   };
   //removes message first, then expanded
 
@@ -144,7 +144,7 @@ const BookList = ({
                 {hoveredBook === book.key && buttonMessage}
               </Button>
               <Button variant="outline-primary" onClick={() => navToNote(book)}>
-                Select
+                Add a note
               </Button>
             </Card>
           </Col>

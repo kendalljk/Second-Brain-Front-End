@@ -76,7 +76,7 @@ const TBRList = ({ toReadList }) => {
               marginTop: "10%",
             }}
           >
-            <Alert.Heading>No books to display yet!</Alert.Heading>
+            <Alert.Heading>No books to display!</Alert.Heading>
             <p>
               Unlock your potential through the transformative power of reading
               and learning from the wisdom of others. Search for books, add your

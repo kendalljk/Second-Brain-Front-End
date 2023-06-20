@@ -30,6 +30,11 @@ const BookSearch = ({ bookData, setBookData, bookIndex, setBookIndex }) => {
     setBookIndex((prevIndex) => Math.min(prevIndex + 5, bookData.length - 5));
   };
 
+  useEffect(() => {
+    console.log("Book Index", bookIndex);
+  }, [bookIndex]);
+  //ensures that state is updated to make handlePrevClick function correctly
+
   const handlePrevClick = () => {
     setBookIndex((prevIndex) => Math.max(prevIndex - 5, 0));
   };

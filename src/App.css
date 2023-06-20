@@ -33,7 +33,7 @@ form {
 }
 
 .formTitle{
-  background-color: rgba(8, 8, 27, 0.774);
+  background-color: #343a40;
   color: white;
   margin-top: 5%;
   margin-bottom: 0;
@@ -256,4 +256,21 @@ select {
   width: 6rem !important;
   border-radius: 5% !important;
   transition: width 0.3s ease !important;
+}
+
+.spin-animation {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
