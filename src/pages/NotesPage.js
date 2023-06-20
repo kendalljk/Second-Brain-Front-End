@@ -49,7 +49,7 @@ const NotesPage = ({ noteCollection }) => {
                 }`}
                 style={{
                   width: "18rem",
-                  height: "24rem",
+                  height: "26rem",
                   boxShadow: "10px 10px 10px 5px rgba(0, 0, 0, 0.5)",
                 }}
               >
@@ -73,14 +73,23 @@ const NotesPage = ({ noteCollection }) => {
                       padding: "2% 0",
                       display: "flex",
                       flexDirection: "column",
-                      justifyContent: "flex-start",
+                      justifyContent: "space-between",
                     }}
                   >
                     <Card.Title as="h6">{book.title}</Card.Title>
-                    <div className="author note-text">By: {book.author}</div>
+                    <div className="author note-text align-bottom">
+                      By: {book.author}
+                    </div>
 
                     {book.bookSummary.split("\n\n").map((paragraph, index) => (
-                      <div className="summary note-text" key={index}>
+                      <div
+                        className="summary note-text"
+                        key={index}
+                        style={{
+                          position: "absolute",
+                          bottom: "2%",
+                        }}
+                      >
                         {paragraph}
                       </div>
                     ))}
@@ -90,7 +99,7 @@ const NotesPage = ({ noteCollection }) => {
                   <Card.Body
                     style={{
                       width: "18rem",
-                      height: "24rem",
+                      height: "25rem",
                       overflowY: "auto",
                     }}
                   >

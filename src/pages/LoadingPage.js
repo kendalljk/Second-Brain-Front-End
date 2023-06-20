@@ -31,8 +31,8 @@ const LoadingPage = () => {
           className="spin-animation"
           style={{
             width: "100%",
-            height: "30%",
-            marginTop: "100%",
+            height: "14%",
+            marginTop: "320%",
           }}
         />
         <img
@@ -43,6 +43,7 @@ const LoadingPage = () => {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
+            height: "25%",
           }}
         />
       </div>
